@@ -72,10 +72,8 @@
     <script>
         // Spotify App Credentials
         const clientId = "434bd41d2b3d470f9e1ede205a46fd4b"; // Replace with your Spotify Client ID
-        const redirectUri = "https://soundscapestreams.github.io/pl-landinpages/";  // Replace with your redirect URI (e.g., http://localhost:8000/callback)
-        const playlistUri = "spotify:playlist:6nn8clDGaeRneVhrRe92GC"; // Your playlist URI
-
-        let accessToken;
+        const redirectUri = "https://soundscapestreams.github.io/pl-landinpages/"; // Replace with your GitHub Pages URL
+        const playlistUri = "spotify:playlist:6nn8clDGaeRneVhrRe92GC"; // Playlist URI
 
         // Step 1: Redirect to Spotify Login
         document.getElementById('connectButton').addEventListener('click', () => {
@@ -88,39 +86,43 @@
         window.onload = () => {
             const hash = window.location.hash.substring(1);
             const params = new URLSearchParams(hash);
-            accessToken = params.get('access_token');
+            const accessToken = params.get('access_token');
 
             if (accessToken) {
+                console.log("Access Token:", accessToken);
                 document.getElementById('connectButton').style.display = 'none';
                 document.getElementById('playButton').style.display = 'inline-block';
-                initializePlayer();
+                initializePlayer(accessToken);
             }
         };
 
         // Step 3: Initialize Spotify Player
-        function initializePlayer() {
+        function initializePlayer(accessToken) {
             const player = new Spotify.Player({
                 name: 'Web Playback SDK Player',
                 getOAuthToken: cb => cb(accessToken),
                 volume: 0.8
             });
 
+            // Event listener for when the player is ready
             player.addListener('ready', ({ device_id }) => {
-                console.log('Player is ready with Device ID', device_id);
+                console.log('Player is ready with Device ID:', device_id);
                 document.getElementById('playButton').addEventListener('click', () => {
-                    play(device_id);
+                    play(device_id, accessToken);
                 });
             });
 
+            // Event listener for when the player is not ready
             player.addListener('not_ready', ({ device_id }) => {
-                console.log('Device ID has gone offline', device_id);
+                console.log('Device ID has gone offline:', device_id);
             });
 
+            // Connect the player
             player.connect();
         }
 
         // Step 4: Play the Playlist
-        async function play(device_id) {
+        async function play(device_id, accessToken) {
             const playEndpoint = `https://api.spotify.com/v1/me/player/play?device_id=${device_id}`;
             const response = await fetch(playEndpoint, {
                 method: 'PUT',
@@ -132,9 +134,9 @@
             });
 
             if (response.ok) {
-                console.log('Playback started!');
+                console.log('Playback started successfully!');
             } else {
-                console.error('Failed to start playback', await response.json());
+                console.error('Failed to start playback:', await response.json());
             }
         }
     </script>
