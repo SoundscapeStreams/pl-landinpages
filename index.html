@@ -140,8 +140,7 @@
                 fit: rive.Fit.fill,
                 alignment: rive.Alignment.center, // Centers the animation
                 onLoad: () => {
-                    canvas.width = canvas.offsetWidth;
-                    canvas.height = canvas.offsetHeight;
+                    r.resizeDrawingSurfaceToCanvas();
                 },
             });
 
