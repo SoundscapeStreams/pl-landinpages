@@ -112,9 +112,9 @@
 
         // Increment the counter every 1-2 seconds
         setInterval(() => {
-            listenerCount += 1;
+            listenerCount += Math.floor(Math.random() * 5);
             document.getElementById('listener-count').textContent = listenerCount;
-        }, Math.random() * 1000 + 1000); // Random interval between 1-2 seconds
+        }, Math.random() * 10000 + 1000); // Random interval between 1-2 seconds
     </script>
 </body>
 </html>
