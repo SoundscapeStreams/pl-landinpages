@@ -133,10 +133,12 @@
 
             // Initialize the Rive animation
             const r = new rive.Rive({
-                src: 'assets/background_soundscape.riv',
+                src: 'assets/background_soundscape.riv', // Path to the Rive file
                 canvas: canvas,
                 autoplay: true,
                 loop: true,
+                fit: rive.Fit.cover, // Ensures the animation covers the entire canvas
+                alignment: rive.Alignment.center, // Centers the animation
                 onLoad: () => {
                     canvas.width = canvas.offsetWidth;
                     canvas.height = canvas.offsetHeight;
