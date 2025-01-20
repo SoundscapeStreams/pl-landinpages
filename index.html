@@ -11,28 +11,47 @@
             padding: 0;
             background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             height: 100vh;
         }
 
-        .container {
-            width: 400px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+        /* Header */
+        .header {
+            background: #1DB954;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1DB954;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9em;
+            position: sticky;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
-        .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
         .playlist-name {
-            font-size: 1.2em;
+            font-size: 1.5em;
             margin-bottom: 20px;
         }
 
@@ -40,58 +59,45 @@
             display: inline-block;
             background: #1DB954;
             color: white;
-            font-size: 1em;
+            font-size: 1.2em;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-transform: uppercase;
             font-weight: bold;
-            margin-bottom: 20px;
         }
 
-        .info-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
+        .connect-button:hover {
+            background: #1ed760;
         }
 
+        /* Utility Classes */
         .play-icon {
             font-size: 1.5em;
+            margin-right: 10px;
             cursor: pointer;
         }
 
         .listeners {
-            text-align: right;
-            font-size: 0.9em;
+            font-size: 1em;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Logo Section -->
-        <div class="logo">@soundscape</div>
-        
-        <!-- Playlist Name -->
+    <!-- Header -->
+    <div class="header">@soundscape</div>
+
+    <!-- Main Content -->
+    <div class="content">
         <div class="playlist-name">Playlist Name</div>
-        
-        <!-- Connect Button -->
         <button class="connect-button">Connect to Spotify</button>
-        
-        <!-- Info Section -->
-        <div class="info-section">
-            <!-- Play Icon -->
-            <div class="play-icon">▶</div>
-            
-            <!-- Playlist Info -->
-            <div class="listeners">
-                <div>3,569</div>
-                <div>Listening Now</div>
-            </div>
-        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="play-icon">▶</div>
+        <div class="listeners">3,569 Listening Now</div>
     </div>
 </body>
 </html>
