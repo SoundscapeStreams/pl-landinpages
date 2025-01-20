@@ -155,6 +155,9 @@
                 canvas: canvas,
                 autoplay: true,
                 loop: true,
+                onLoad: () => {
+                  r.resizeDrawingSurfaceToCanvas();
+                },
             });
 
             r.on('loaderror', () => {
