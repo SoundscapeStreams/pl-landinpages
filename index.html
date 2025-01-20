@@ -135,11 +135,13 @@
             const r = new rive.Rive({
                 src: 'assets/background_soundscape.riv', // Path to the Rive file
                 canvas: canvas,
-                autoplay: true,
-                loop: true,
-                fit: rive.Fit.fill,
+                autoplay: true, // Automatically start the animation
+                loop: true, // Loop the animation
+                fit: rive.Fit.fill, // Stretches the animation to fill the canvas
                 alignment: rive.Alignment.center, // Centers the animation
                 onLoad: () => {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
                     r.resizeDrawingSurfaceToCanvas();
                 },
             });
